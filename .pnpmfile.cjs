@@ -1,5 +1,4 @@
 function readPackage(pkg, context) {
-  // skip packages that are ours
   if (pkg.name && pkg.name.startsWith("@test")) return pkg;
 
   const isReactInUse =
@@ -16,16 +15,9 @@ function readPackage(pkg, context) {
     const peerDependencies = pkg.peerDependencies || {};
     pkg.peerDependencies = peerDependencies;
 
-    peerDependencies["@types/react"] = "17 || 18";
+    // TODO: comment in
+    // peerDependencies["@types/react"] = "17 || 18";
   }
-
-  if (pkg.name === "@mdx-js/mdx") {
-    context.log(`isReactInUse ${isReactInUse}`);
-    context.log(`isTypesReactInUse ${isTypesReactInUse}`);
-    context.log(`pkg ${pkg.peerDependencies["@types/react"]}`);
-    context.log(JSON.stringify(pkg, null, 2));
-  }
-
   return pkg;
 }
 
